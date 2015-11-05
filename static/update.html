@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="http://cdn-img.easyicon.net/png/16/1614.png">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:5000/static/css/signin.css" />
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+<form action="/admin/update" class="form-signin FontComic" method="post" enctype="multipart/form-data">
+           <h2 class="form-signin-heading">设计作品上传</h2>
+<input class="form-control text-box single-line" data-val="true" data-val-required="请输入用户名" id="UserName" name="UserName" placeholder="作者名" type="text" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+<input class="form-control text-box single-line password" id="Password" name="file" placeholder="作品(.png等)" type="file" value="" />
+   
+<!-- <div class="checkbox " style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:20px">
+        记住我
+        <input class="text-center  check-box" data-val="true" data-val-required="是否记住密码 字段是必需的。" id="IsRemember" name="IsRemember" style="margin-left:10px;margin-bottom:20px;margin-top:8px" type="checkbox" value="true" /><input name="IsRemember" type="hidden" value="false" />
+
+    </div> -->
+            <button class="btn btn-lg btn-primary btn-block" type="submit">上传</button>
+</form>    </div>
+   
+
+
+
+<!-- Visual Studio Browser Link -->
+
+<!-- End Browser Link -->
+
+</body>
+</html>
