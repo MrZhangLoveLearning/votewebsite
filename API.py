@@ -5,6 +5,7 @@ import dbhelper
 base_path=sys.path[0]
 app = Flask(__name__)
 app.debug=True
+app.secret_key='vote_system'
 administrator_list={'MrZhang':'123456'}
 @app.route('/')
 def index():
@@ -94,5 +95,4 @@ def test():
     return 'You are not logged in'
 
 if __name__=='__main__':
-	app.secret_key='vote_system'
 	app.run()

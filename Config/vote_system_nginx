@@ -8,11 +8,8 @@ server {
     
 	location / {
 		include uwsgi_params;
-		uwsgi_pass 127.0.0.1:9001;
-		uwsgi_param UWSGI_PYHOME myenv;
-		uwsgi_param UWSGI_CHDIR VoteSystem;
-		uwsgi_param UWSGI_MODULE API;
-		uwsgi_param UWSGI_CALLABLE app;
+		uwsgi_pass unix:/var/www/demoapp/demoapp_uwsgi.sock;
+		
 	}
     
 	error_page 404 /404.html;
