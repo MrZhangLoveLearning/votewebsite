@@ -73,12 +73,12 @@ def admin_update():
 			if os.name=='nt':
 				if not os.path.exists(base_path_w):
 					os.mkdir(base_path_w)
-					de_file.save(base_path+base_path_w+work_name)
+				de_file.save(base_path+base_path_w+work_name)
 			if os.name=='posix':
 				if not os.path.exists(base_path_l):
 					os.mkdir(base_path_l)
-					de_file.save(base_path+base_path_l+work_name)
-			compressPic.pressPic(work_name)
+				de_file.save(base_path+base_path_l+work_name)
+			# compressPic.pressPic(work_name)
 			dbhelper.save_design(filename=work_name,designer=request.form['UserName'].strip())
 			return 'Success!'
 
