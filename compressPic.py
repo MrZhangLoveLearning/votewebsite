@@ -24,7 +24,7 @@ def pressPic(work_name):
 	base_path_w='.\\static\\upfile\\'
 	base_path_l='./static/upfile/'
 	fp=''
-	if os.name='nt':
+	if os.name=='nt':
 		fp=base_path_w+work_name
 		if not os.path.exists('.\\static\\small_upfile'):
 			os.mkdir('.\\static\\small_upfile')
@@ -32,7 +32,7 @@ def pressPic(work_name):
 		w, h = img.size
 		img.thumbnail((w/2,h/2))
 		img.save('.\\static\\small_upfile\\'+work_name, "JPEG")
-	if os.name='posix':
+	if os.name=='posix':
 		fp=base_path_l+work_name
 		if not os.path.exists('./static/small_upfile'):
 			os.mkdir('./static/small_upfile')

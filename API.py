@@ -67,9 +67,17 @@ def admin_update():
 		if dbhelper.exit_design(request.form['UserName'].strip()):
 			return 'you have already update a designer'
 		else:
-			if not os.path.exists('.\\static\\upfile\\'):
-				os.mkdir('.\\static\\upfile\\')
-			de_file.save(base_path+'\\static\\upfile\\'+work_name)
+			base_path_l='./static/upfile/'
+			
+			base_path_w='.\\static\\upfile\\'
+			if os.name=='nt':
+				if not os.path.exists(base_path_w):
+					os.mkdir(base_path_w)
+					de_file.save(base_path+base_path_w+work_name)
+			if os.name=='posix':
+				if not os.path.exists(base_path_l):
+					os.mkdir(base_path_l)
+					de_file.save(base_path+base_path_l+work_name)
 			compressPic.pressPic(work_name)
 			dbhelper.save_design(filename=work_name,designer=request.form['UserName'].strip())
 			return 'Success!'
