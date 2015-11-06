@@ -39,5 +39,30 @@ def save_design(filename,designer):
 	session.add(work)
 	session.add(designer_database)
 	session.commit()
-	
+
+
+def addVoter(username,desingn_id):
+	session=connection.init_db()
+	query=session.query(VoteModel.Voter)
+	voter=query.filter(VoteModel.Voter.name==username).scalar()
+	if voter is None:
+		voter=VoteModel.Voter(name=username,design_id=desingn_id)
+		session.add(voter)
+		session.commit()
+
+def get_designs():
+	session=connection.init_db()
+	query=session.query(VoteModel.Design)
+	lis=[]
+	for q in query.all():
+		design={}
+		design['path']=q.work_name
+		design['voters']=session.query(func.count('*')).filter(VoteModel.Voter.design_id ==q.id).scalar()
+		lis.append((q.id,design))
+	# print lis	
+	return lis
+	 # filter()
+get_designs()
+
+
 	

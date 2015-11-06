@@ -1,5 +1,5 @@
 # coding=utf-8
-from flask import Flask,session,redirect,escape,request,abort
+from flask import Flask,session,redirect,escape,request,abort,jsonify
 import sys
 import dbhelper
 base_path=sys.path[0]
@@ -17,6 +17,23 @@ def login(name):
     session['username'] =escape(name)
     print session['username']
     return redirect('/')
+@app.route('/vote',methods=['GET','POST'])
+def vote():
+	if not 'username' in session:
+		return 'you stay too long,please login agine!'
+	desingn_str=request.args.get('id','0')
+	desingn_id=int(desingn_str)
+	if desingn_id==0:
+		return 'id errror'
+	else:
+		dbhelper.addVoter(session['username'],desingn_id)
+		return 'Success!'
+
+@app.route('/list',methods=['GET','POST'])
+def designs_list():
+	lis=dbhelper.get_designs()
+	return jsonify(lis)
+
 
 @app.route('/admin/login',methods=['GET','POST'])
 def admin_login():
@@ -37,6 +54,8 @@ def valid_login(UserName,Password):
 
 # to make only project by one designer
 import my_security
+import os
+import compressPic
 @app.route('/admin/update',methods=['POST'])
 def admin_update():
 	if not 'UserName' in session:
@@ -47,7 +66,10 @@ def admin_update():
 		if dbhelper.exit_design(request.form['UserName'].strip()):
 			return 'you have already update a designer'
 		else:
+			if not os.path.exists('.\\static\\upfile\\'):
+				os.mkdir('.\\static\\upfile\\')
 			de_file.save(base_path+'\\static\\upfile\\'+work_name)
+			compressPic.pressPic(work_name)
 			dbhelper.save_design(filename=work_name,designer=request.form['UserName'].strip())
 			return 'Success!'
 

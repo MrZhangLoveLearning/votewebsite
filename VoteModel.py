@@ -43,5 +43,5 @@ class Voter(Base):
 
 # session.commit()
 # connection.init_db()
-connection.drop_db()
+# connection.drop_db()
 
