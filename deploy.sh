@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "deploy the VoteProject !"
+echo "deploy the votewebsite !"
 #!/bin/bash
 
 # Author : mozhiyan
@@ -9,7 +9,7 @@ echo "deploy the VoteProject !"
 # echo "What is your name?"
 # read PERSON
 # echo "Hello, $PERSON"
-project_path="/var/www/VoteProject"
+project_path="/var/www/votewebsite"
 
 create_file(){
 	if [ -d "$1" ]
@@ -26,17 +26,18 @@ sudo chown -R www-data:www-data $1
 
 }
 create_file /var/www
-create_file /var/www/VoteProject
+create_file /var/www/votewebsite
 create_file /var/www/env
-cd /var/www
-ssh-keygen -t rsa -C "2529450174@qq.com" # Creates a new ssh key using the provided email
-# Generating public/private rsa key pair...
-sudo git clone git@git.oschina.net:NCUHomeGit/VoteProject.git
+# cd /var/www
+# if [ ! -f "~/.ssh/id_rsa.pub"]
+# ssh-keygen -t rsa -C "2529450174@qq.com" # Creates a new ssh key using the provided email
+# # Generating public/private rsa key pair...
+# sudo git clone git@git.oschina.net:NCUHomeGit/votewebsite.git
 if [ ! -f "/var/www/env/bin/activate" ]
 then
 	sudo virtualenv env
 fi
-# change_own_mod /var/www/VoteProject
+# change_own_mod /var/www/votewebsite
 
 # delete the old nginx config
 if [ -f "/etc/nginx/sites-enabled/default" ]
@@ -45,11 +46,11 @@ then
 fi
 
 source  /var/www/env/bin/activate
-cd /var/www/VoteProject
+cd /var/www/votewebsite
 pip install -r requirements.txt
 
 # add to nginx config to run the website
-sudo cp -f /var/www/VoteProject/Config/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
+sudo cp -f /var/www/votewebsite/Config/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
 sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
 
 # change the log to  everyone
@@ -57,7 +58,7 @@ change_own_mod /var/log
 
 # run the website
 sudo /etc/init.d/nginx restart
-uwsgi --ini /var/www/VoteProject/Config/vote_system_uwsgi.ini
+uwsgi --ini /var/www/votewebsite/Config/vote_system_uwsgi.ini
 
 
 
