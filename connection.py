@@ -27,13 +27,14 @@ class Sqlite_config_helper(object):
 
 
 # load config datebase by MySQL
-mysql=Config_helper('Ncuhome')		
-DB_CONNECT_STRING = 'mysql+pymysql://%s:%s@%s/%s?charset=utf8'%\
-	(mysql.user,mysql.password,mysql.host,mysql.database)
+# mysql=Config_helper('Ncuhome')		
+# DB_CONNECT_STRING = 'mysql+pymysql://%s:%s@%s/%s?charset=utf8'%\
+# 	(mysql.user,mysql.password,mysql.host,mysql.database)
 
-# load sqlite 
-sqlite=Sqlite_config_helper('VoteSys')
-DB_CONNECT_STRING='sqlite:///%s'%(sqlite.path)
+# # load sqlite 
+# sqlite=Sqlite_config_helper('VoteSys')
+# DB_CONNECT_STRING='sqlite:///%s'%(sqlite.path)
+DB_CONNECT_STRING='sqlite:////var/www/votewebsite/testDB.db'
 
 # if 'engine' in locals() and  globals():
 # 	pass
