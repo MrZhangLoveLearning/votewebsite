@@ -2,10 +2,7 @@ server {
 	listen 8080;
 	server_name localhost;
     
-	location /static {
-		alias  /static;
-	}
-    
+	
 	location / {
 		include uwsgi_params;
 		uwsgi_pass unix:/var/www/votewebsite/vote_system_uwsgi.sock;
