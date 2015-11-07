@@ -34,14 +34,14 @@ change_own_mod /var/www/env
 # if [ ! -f "~/.ssh/id_rsa.pub"]
 # ssh-keygen -t rsa -C "2529450174@qq.com" # Creates a new ssh key using the provided email
 # # Generating public/private rsa key pair...
-git clone git@github.com:MrZhangLoveLearning/votewebsite.git
-sudo rm -rf /var/www/votewebsite
-sudo mkdir /var/www/votewebsite
-chmod  777 /var/www/votewebsite
-cd /var/www/
-git clone https://github.com/MrZhangLoveLearning/votewebsite.git
-chmod  777 /var/www/votewebsite/deploy.sh
-./var/www/votewebsite/deploy.sh
+# git clone https://github.com/MrZhangLoveLearning/votewebsite.git
+# sudo rm -rf /var/www/votewebsite
+# sudo mkdir /var/www/votewebsite
+# sudo chmod  777 /var/www/votewebsite
+# cd /var/www/
+# git clone https://github.com/MrZhangLoveLearning/votewebsite.git
+# chmod  777 /var/www/votewebsite/deploy.sh
+# ./var/www/votewebsite/deploy.sh
 
 if [ ! -f "/var/www/env/bin/activate" ]
 then
