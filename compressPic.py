@@ -20,6 +20,7 @@
 from __future__ import print_function
 import os, sys
 from PIL import Image
+# from PIL 
 base_path=sys.path[0]
 def pressPic(work_name):
 	base_path_w='.\\static\\upfile\\'

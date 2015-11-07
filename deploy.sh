@@ -58,7 +58,12 @@ fi
 source  /var/www/env/bin/activate
 cd /var/www/votewebsite
 pip install -r requirements.txt
-pip install ConfigParser
+# pip install ConfigParser
+
+# for pillow jepg work
+sudo apt-get install libjpeg-dev
+pip uninstall pillow
+pip install --no-cache-dir -I pillow
 
 # add to nginx config to run the website
 sudo cp -f /var/www/votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx

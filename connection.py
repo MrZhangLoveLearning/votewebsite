@@ -34,7 +34,11 @@ class Sqlite_config_helper(object):
 # # load sqlite 
 # sqlite=Sqlite_config_helper('VoteSys')
 # DB_CONNECT_STRING='sqlite:///%s'%(sqlite.path)
+
 DB_CONNECT_STRING='sqlite:////var/www/votewebsite/testDB.db'
+import os
+if os.name=='nt':
+	DB_CONNECT_STRING='sqlite:///G:\\Python\\Project\\VoteSystem\\testDB.db'
 
 # if 'engine' in locals() and  globals():
 # 	pass
