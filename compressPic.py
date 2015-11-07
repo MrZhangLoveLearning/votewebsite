@@ -20,6 +20,7 @@
 from __future__ import print_function
 import os, sys
 from PIL import Image
+base_path=sys.path[0]
 def pressPic(work_name):
 	base_path_w='.\\static\\upfile\\'
 	base_path_l='./static/upfile/'
@@ -33,12 +34,12 @@ def pressPic(work_name):
 		img.thumbnail((w/2,h/2))
 		img.save('.\\static\\small_upfile\\'+work_name, "JPEG")
 	if os.name=='posix':
-		fp=base_path_l+work_name
-		if not os.path.exists('./static/small_upfile'):
-			os.mkdir('./static/small_upfile')
+		fp=base_path+'/static/upfile/'+work_name
+		if not os.path.exists(base_path+'/static/small_upfile'):
+			os.mkdir(base_path+'/static/small_upfile')
 		img = Image.open(fp)
 		w, h = img.size
 		img.thumbnail((w/2,h/2))
-		img.save('./static/small_upfile/'+work_name, "JPEG")
+		img.save(base_path+'/static/small_upfile/'+work_name, "JPEG")
 	
 	

@@ -75,8 +75,8 @@ def admin_update():
 					os.mkdir(base_path_w)
 				de_file.save(base_path+base_path_w+work_name)
 			if os.name=='posix':
-				if not os.path.exists('./static/upfile/'):
-					os.mkdir('./static/upfile/')
+				if not os.path.exists(base_path+'/static/upfile/'):
+					os.mkdir(base_path+'/static/upfile')
 				de_file.save(base_path+base_path_l+work_name)
 			compressPic.pressPic(work_name)
 			dbhelper.save_design(filename=work_name,designer=request.form['UserName'].strip())
