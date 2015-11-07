@@ -53,7 +53,7 @@ pip install -r requirements.txt
 pip install ConfigParser
 
 # add to nginx config to run the website
-sudo cp -f /var/www/votewebsite/Config/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
+sudo cp -f /var/www/votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
 sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
 
 # change the log to  everyone
@@ -61,7 +61,7 @@ change_own_mod /var/log
 
 # run the website
 sudo /etc/init.d/nginx restart
-uwsgi --ini /var/www/votewebsite/Config/vote_system_uwsgi.ini
+uwsgi --ini /var/www/votewebsite/vote_system_uwsgi.ini
 
 
 
