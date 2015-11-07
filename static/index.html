@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>工作证投票</title>
 	<link rel="stylesheet" href="css/main.css">
-	<script src="js/angular.min.js"></script>
+	<script src="/static/js/angular.min.js"></script>
 </head>
 <body>
 	<div class="warpper">
 		<div class="container" ng-app="myApp" ng-controller="imgControl">
 			<div class="box" ng-repeat="x in images">
 				<div class="box_img">
-					<img  src="{{x.path}}" alt="">
+					<img  ng-src="/static/upfile/{{x.path}}" alt="">
 				</div>
 				<div class="box_img_about">
 					<span>
@@ -27,4 +28,41 @@
 	</div>
 </body>
 <script src="js/main.js"></script>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>工作证投票</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div class="warpper">
+        <div class="container" ng-app="myApp" ng-controller="imgControl">
+            <div class="box" ng-repeat="x in images">
+                <div class="box_img">
+                    <img src="{{x.path}}" alt="">
+                </div>
+                <div class="box_img_about">
+                    <span>
+						作品ID：{{x.id}}
+					</span>
+                    <span>
+						得票数：{{x.voters}}
+					</span>
+                </div>
+                <div class="addVote">
+                    <span ng-click="vote(this)">
+						{{toVote}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>
+
+
 </html>
