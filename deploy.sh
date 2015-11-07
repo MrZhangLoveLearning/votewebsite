@@ -69,7 +69,7 @@ change_own_mod /var/log
 
 # run the website
 sudo /etc/init.d/nginx restart
-if [ ! -d "/var/log/uwsgi"]
+if [ ! -d "/var/log/uwsgi" ]
 then
 	sudo mkdir /var/log/uwsgi
 fi

@@ -31,6 +31,6 @@ return
 "voters"----投票人数
 
 
-Creating a new branch is quick AND simple.
+
 
 
