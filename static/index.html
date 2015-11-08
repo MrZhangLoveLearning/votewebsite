@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作证投票</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/angular.min.js"></script>
@@ -12,9 +13,10 @@
 <body>
     <div class="warpper">
         <div class="container" ng-app="myApp" ng-controller="imgControl">
+            <h2>家园工作室2015工作证投票</h2>
             <div class="box" ng-repeat="x in images">
                 <div class="box_img">
-                    <img src="{{x.path}}" alt="">
+                    <img ng-src="{{x.path}}" alt="">
                 </div>
                 <div class="box_img_about">
                     <span>
@@ -30,7 +32,14 @@
                     </span>
                 </div>
             </div>
+            <div class="clear">
+                
+            </div>
+            <div class="footer">
+            @家园工作室
         </div>
+        </div>
+        
     </div>
 </body>
 <script src="js/main.js"></script>
