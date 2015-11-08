@@ -56,13 +56,14 @@ def get_designs():
 	lis=[]
 	for q in query.all():
 		design={}
+		design['id']=q.id
 		design['path']=q.work_name
 		design['voters']=session.query(func.count('*')).filter(VoteModel.Voter.design_id ==q.id).scalar()
-		lis.append((q.id,design))
+		lis.append(design)
 	# print lis	
 	return lis
 	 # filter()
-get_designs()
+# get_designs()
 
 
 	

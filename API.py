@@ -33,7 +33,7 @@ def vote():
 @app.route('/list',methods=['GET','POST'])
 def designs_list():
 	lis=dbhelper.get_designs()
-	return jsonify(lis)
+	return jsonify({'vote':lis})
 
 
 @app.route('/admin/login',methods=['GET','POST'])
