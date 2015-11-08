@@ -5,7 +5,7 @@ app.controller('imgControl', function($scope, $http) {
 	$http.get("/list")
 	.success(function(data){
 		$scope.images = data.vote;
-	})
+	});
 
     $scope.toVote = '投ta一票';
 
@@ -16,7 +16,7 @@ app.controller('imgControl', function($scope, $http) {
                 $scope.toVope = '已投';
                 $http.get("/list")
                     .success(function(data) {
-                        $scope.images = data;
+                        $scope.images = data.vote;
                     });
             });
     };
