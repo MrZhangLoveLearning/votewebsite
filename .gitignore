@@ -4,3 +4,4 @@ upfile
 small_upfile
 !small_upfile/
 testDb.db
+*.pyc
