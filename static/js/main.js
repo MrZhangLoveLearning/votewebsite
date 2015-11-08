@@ -33,18 +33,3 @@ app.controller('imgControl', function($scope, $http) {
 
 });
 
-
-
-{
-    vote[
-        {
-            "id":"2",
-            "path":"url",
-            "voters":"num"
-        },{
-            "id":"2",
-            "path":"url",
-            "voters":"num"
-        }
-    ]
-}
