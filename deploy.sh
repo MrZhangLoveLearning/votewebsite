@@ -9,8 +9,10 @@ echo "deploy the votewebsite !"
 # echo "What is your name?"
 # read PERSON
 # echo "Hello, $PERSON"
-project_path="/var/www/votewebsite"
-
+project_path=/var/www/vote/votewebsite
+project_dict=/var/www/vote
+project_env=/var/www/vote/env
+uwsgi_log=/var/www/log/
 create_file(){
 	if [ -d "$1" ]
 	then 
@@ -21,15 +23,11 @@ create_file(){
 	fi
 }
 change_own_mod(){
-sudo chmod -R 777 $1
+sudo chmod -R 755 $1
 sudo chown -R www-data:www-data $1
 
 }
-create_file /var/www
-create_file /var/www/votewebsite
-create_file /var/www/env
-change_own_mod /var/www/votewebsite
-change_own_mod /var/www/env
+
 # cd /var/www
 # if [ ! -f "~/.ssh/id_rsa.pub"]
 # ssh-keygen -t rsa -C "2529450174@qq.com" # Creates a new ssh key using the provided email
@@ -43,46 +41,57 @@ change_own_mod /var/www/env
 # chmod  777 /var/www/votewebsite/deploy.sh
 # ./var/www/votewebsite/deploy.sh
 
-if [ ! -f "/var/www/env/bin/activate" ]
+# create the virtualenv of project
+create_file $project_env
+if [ ! -f "$project_env/bin/activate" ]
 then
-	virtualenv env
+	sudo virtualenv env
+	# load the virtualenv 
+	sudo source  $project_env/bin/activate
+	cd $project_path
+ 	sudo pip install -r requirements.txt
+	# for pillow jepg work
+	sudo apt-get install libjpeg-dev
+	sudo pip uninstall pillow
+	sudo pip install --no-cache-dir -I pillow
 fi
-# change_own_mod /var/www/votewebsite
+
 
 # delete the old nginx config
-if [ -f "/etc/nginx/sites-enabled/default" ]
-then
-	sudo rm /etc/nginx/sites-enabled/default
-fi
+# if [ -f "/etc/nginx/sites-enabled/default" ]
+# then
+# 	sudo rm /etc/nginx/sites-enabled/default
+# fi
 
-source  /var/www/env/bin/activate
-cd /var/www/votewebsite
-pip install -r requirements.txt
+
 # pip install ConfigParser
 
-# for pillow jepg work
-sudo apt-get install libjpeg-dev
-pip uninstall pillow
-pip install --no-cache-dir -I pillow
+
 
 # add to nginx config to run the website
-sudo cp -f /var/www/votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
+sudo cp -f $project_path/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
 sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
 
-# change the log to  everyone
-change_own_mod /var/log
+
 
 # run the website
-sudo /etc/init.d/nginx restart
-if [ ! -d "/var/log/uwsgi" ]
-then
-	sudo mkdir /var/log/uwsgi
-fi
-change_own_mod /var/log/uwsgi
+sudo /etc/init.d/nginx reload
 
-# delete the whole uwsgi work
-ps -ef |grep uwsgi|grep -v grep|cut -c 9-15|xargs sudo kill -s 9
-sudo setsid  uwsgi --uid www-data --gid www-data --ini /var/www/votewebsite/vote_system_uwsgi.ini
+
+# build the uwsgi log 
+# if [ ! -d $uwsgi_log ]
+# then
+# 	sudo mkdir $uwsgi_log
+# fi
+# change_own_mod $uwsgi_log
+
+# delete the other's write right of vote
+change_own_mod $project_dict
+
+# delete the whole uwsgi work and restart
+# ps -ef |grep uwsgi|grep -v grep|cut -c 9-15|xargs sudo kill -s 9
+# sudo setsid  uwsgi --uid www-data --gid www-data --ini $project_path/vote_system_uwsgi.ini
+sudo uwsgi --ini $project_path/vote_system_uwsgi.ini
 
 
 
