@@ -18,10 +18,12 @@ methods=GET or POST
 
 return 
 {
-  "1": {
+  "vote": 
+  [{"id":1
     "path": "Ln22gnCe175492b35887dc2fb61e549bb8a0597512510089.png", 
     "voters": 1
-  }
+    }
+  ]
 }
 
 "1"-----作品id
