@@ -6,7 +6,7 @@ base_path=sys.path[0]
 app = Flask(__name__)
 app.debug=True
 app.secret_key='vote_system'
-administrator_list={'MrZhang':'123456'}
+administrator_list={'MrZhang':'123456','Guest':'123456'}
 @app.route('/')
 def index():
 	if 'username' in session:
@@ -89,7 +89,16 @@ def get_pic_name(filename,username):
 		raise NameError('the filename is not correct')
 	return pswd+'.'+file_type[1]
 
-
+@app.route('/delete/<int:id>')
+def delete(id):
+	if not 'UserName' in session:
+		return 'you have not login in'
+	else:
+		if not session['UserName']=='MrZhang':
+			return 'Guest not have right delete the design'
+		else:
+			dbhelper.delete_design(id)
+			return 'delete the design success'
 
 
 

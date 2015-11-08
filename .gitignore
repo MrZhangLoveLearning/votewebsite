@@ -1,0 +1,7 @@
+# ignore the update file but not the dict
+upfile
+!upfile
+small_upfile
+!small_upfile/
+testDb.db
+*.pyc
