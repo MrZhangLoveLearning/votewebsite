@@ -2,67 +2,45 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>工作证投票</title>
-	<link rel="stylesheet" href="/static/css/main.css">
-	<script src="/static/js/angular.min.js"></script>
-</head>
-<body>
-	<div class="warpper">
-		<div class="container" ng-app="myApp" ng-controller="imgControl">
-			<div class="box" ng-repeat="x in images">
-				<div class="box_img">
-					<img  ng-src="/static/upfile/{{x.path}}" alt="">
-				</div>
-				<div class="box_img_about">
-					<span>
-						{{x.id}}
-					</span>
-					<span>
-						{{x.voters}}
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
-<script src="js/main.js"></script>
-
-
-<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>工作证投票</title>
-    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://home.ncu.edu.cn/2014/images/ncuhome_01.png">
+    <link rel="stylesheet" href="/static/css/main.css">
     <script src="/static/js/angular.min.js"></script>
 </head>
 
 <body>
     <div class="warpper">
         <div class="container" ng-app="myApp" ng-controller="imgControl">
+            <h2>家园工作室2015工作证投票</h2>
             <div class="box" ng-repeat="x in images">
                 <div class="box_img">
-                    <img src="{{x.path}}" alt="">
+                    <img ng-src="{{x.path}}" alt=""> >>>>>>> sccBranch
                 </div>
                 <div class="box_img_about">
                     <span>
-						作品ID：{{x.id}}
-					</span>
+                        作品ID：{{x.id}}
+                    </span>
                     <span>
-						得票数：{{x.voters}}
-					</span>
+                        得票数：{{x.voters}}
+                    </span>
                 </div>
                 <div class="addVote">
                     <span ng-click="vote(this)">
-						{{toVote}}
+                        {{toVote}}
                     </span>
                 </div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="footer">
+                @家园工作室
             </div>
         </div>
     </div>
 </body>
 <script src="/static/js/main.js"></script>
-
 
 </html>
