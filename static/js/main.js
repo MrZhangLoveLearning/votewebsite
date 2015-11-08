@@ -7,16 +7,6 @@ app.controller('imgControl', function($scope, $http) {
 		$scope.images = data.vote;
 	})
 
-
-    $http.get("/list")
-        .success(function(data) {
-            $scope.images = data;
-        });
-    $http.get("/list")
-        .success(function(data) {
-            $scope.images = data;
-        });
-
     $scope.toVote = '投ta一票';
 
     $scope.vote = function(obj) {
