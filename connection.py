@@ -36,7 +36,7 @@ class Sqlite_config_helper(object):
 # DB_CONNECT_STRING='sqlite:///%s'%(sqlite.path)
 import sys
 base_path=sys.path[0]
-DB_CONNECT_STRING='sqlite:////var/www/votewebsite/testDB.db'
+DB_CONNECT_STRING='sqlite:///'+base_path+'/testDB.db'
 import os
 if os.name=='nt':
 	DB_CONNECT_STRING='sqlite:///'+base_path+'\\testDB.db'

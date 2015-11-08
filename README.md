@@ -1,4 +1,23 @@
 #VoteProject
+## build 
+## to start your project
+#### if you don't git clone the project do this
+
+cd /var/www/
+sudo mkdir vote
+cd vote
+sudo git clone https://github.com/MrZhangLoveLearning/votewebsite.git
+sudo chmod +x votewebsite/deploy.sh
+sudo ./votewebsite/deploy.sh
+
+
+#### if you have clone it to local do that
+
+cd /var/vote/votewebsite
+git pull
+./deploy.sh
+
+
 ##API
 
 ####1 投票

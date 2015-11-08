@@ -1,88 +1,72 @@
 #!/bin/bash
 echo "deploy the votewebsite !"
-#!/bin/bash
 
-# Author : mozhiyan
-# Copyright (c) http://see.xidian.edu.cn/cpp/linux/
-# Script follows here:
 
-# echo "What is your name?"
-# read PERSON
-# echo "Hello, $PERSON"
-project_path="/var/www/votewebsite"
+base_dir=/var/www/vote
+cd $base_dir
 
-create_file(){
-	if [ -d "$1" ]
-	then 
-		echo "$1 has already exit"
-	else
-		sudo mkdir $1
-		echo "create $1"
-	fi
-}
-change_own_mod(){
-sudo chmod -R 777 $1
-sudo chown -R www-data:www-data $1
 
-}
-create_file /var/www
-create_file /var/www/votewebsite
-create_file /var/www/env
-change_own_mod /var/www/votewebsite
-change_own_mod /var/www/env
-# cd /var/www
-# if [ ! -f "~/.ssh/id_rsa.pub"]
-# ssh-keygen -t rsa -C "2529450174@qq.com" # Creates a new ssh key using the provided email
-# # Generating public/private rsa key pair...
-# git clone https://github.com/MrZhangLoveLearning/votewebsite.git
-# sudo rm -rf /var/www/votewebsite
-# sudo mkdir /var/www/votewebsite
-# sudo chmod  777 /var/www/votewebsite
-# cd /var/www/
-# git clone https://github.com/MrZhangLoveLearning/votewebsite.git
-# chmod  777 /var/www/votewebsite/deploy.sh
-# ./var/www/votewebsite/deploy.sh
 
-if [ ! -f "/var/www/env/bin/activate" ]
+
+
+
+
+# create the virtualenv of project
+# create_file $project_env
+
+if [ ! -f "$base_dir/env/bin/activate" ]
 then
-	virtualenv env
+	# cd $project_env
+	sudo virtualenv env
+	
 fi
-# change_own_mod /var/www/votewebsite
+
+sudo source  $base_dir/env/bin/activate
+sudo apt-get install libjpeg-dev
+sudo $base_dir/env/bin/pip install -r votewebsite/requirements.txt
+
+#  # if you first use your nginx you can use this
 
 # delete the old nginx config
-if [ -f "/etc/nginx/sites-enabled/default" ]
-then
-	sudo rm /etc/nginx/sites-enabled/default
-fi
+# if [ -f "/etc/nginx/sites-enabled/default" ]
+# then
+# 	sudo rm /etc/nginx/sites-enabled/default
+# fi
 
-source  /var/www/env/bin/activate
-cd /var/www/votewebsite
-pip install -r requirements.txt
+# if you have problem in jepg of IOEF  you may lost this
+
+#    # load the virtualenv 
+# for pillow jepg work
+# sudo pip uninstall pillow
+# sudo pip install --no-cache-dir -I pillow
+
 # pip install ConfigParser
 
-# for pillow jepg work
-sudo apt-get install libjpeg-dev
-pip uninstall pillow
-pip install --no-cache-dir -I pillow
+
 
 # add to nginx config to run the website
-sudo cp -f /var/www/votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
+sudo cp -f votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
 sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
 
-# change the log to  everyone
-change_own_mod /var/log
+# to make the www-data can save the pic of update
+sudo chown -R www-data:www-data votewebsite
+# to open the log to let uwsgi can open itself
+sudo chown -R www-data:www-data /var/www/log/uwsgi_vote.log
 
+sudo   uwsgi  --ini $base_dir/votewebsite/vote_system_uwsgi.ini
 # run the website
-sudo /etc/init.d/nginx restart
-if [ ! -d "/var/log/uwsgi" ]
-then
-	sudo mkdir /var/log/uwsgi
-fi
-change_own_mod /var/log/uwsgi
+# reload nginx
+sudo /etc/init.d/nginx reload
 
-# delete the whole uwsgi work
-ps -ef |grep uwsgi|grep -v grep|cut -c 9-15|xargs sudo kill -s 9
-sudo setsid  uwsgi --uid www-data --gid www-data --ini /var/www/votewebsite/vote_system_uwsgi.ini
+
+
+
+
+
+# delete the whole uwsgi work and restart
+# ps -ef |grep uwsgi|grep -v grep|cut -c 9-15|xargs sudo kill -s 9
+# sudo setsid  uwsgi --uid www-data --gid www-data --ini $project_path/vote_system_uwsgi.ini
+
 
 
 
