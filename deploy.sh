@@ -80,7 +80,7 @@ then
 fi
 change_own_mod /var/log/uwsgi
 
-sudo  uwsgi --uid www-data --gid www-data --ini /var/www/votewebsite/vote_system_uwsgi.ini
+sudo setsid  uwsgi --uid www-data --gid www-data --ini /var/www/votewebsite/vote_system_uwsgi.ini
 
 
 
