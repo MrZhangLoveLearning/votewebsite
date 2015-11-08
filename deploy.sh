@@ -80,6 +80,8 @@ then
 fi
 change_own_mod /var/log/uwsgi
 
+# delete the whole uwsgi work
+ps -ef |grep uwsgi|grep -v grep|cut -c 9-15|xargs sudo kill -s 9
 sudo setsid  uwsgi --uid www-data --gid www-data --ini /var/www/votewebsite/vote_system_uwsgi.ini
 
 

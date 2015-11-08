@@ -63,6 +63,15 @@ def get_designs():
 	# print lis	
 	return lis
 	 # filter()
+def delete_design(id):
+	session=connection.init_db()
+	query=session.query(VoteModel.Design)
+	design=query.filter(VoteModel.Design.id==id).scalar()
+	if design :
+		session.delete(design)
+		session.commit()
+
+
 # get_designs()
 
 
