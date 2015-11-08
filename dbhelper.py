@@ -67,7 +67,9 @@ def delete_design(id):
 	session=connection.init_db()
 	query=session.query(VoteModel.Design)
 	design=query.filter(VoteModel.Design.id==id).scalar()
-	if design :
+	if not design is None :
+		print design.id 
+		print design.work_name 
 		session.delete(design)
 		session.commit()
 

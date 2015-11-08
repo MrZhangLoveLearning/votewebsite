@@ -14,8 +14,10 @@ class Design(Base):
 	id = Column(Integer,autoincrement=True, primary_key=True)
 	work_name=Column(String(100),nullable=False)
 	insert_time = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-	design_id=Column(Integer,ForeignKey('vote_designer.id'),nullable=False)
-	voters=relationship('Voter',backref='design',lazy='dynamic')
+	# ondelete='CASCADE' ----open the delete line
+	design_id=Column(Integer,ForeignKey('vote_designer.id',ondelete='CASCADE'),nullable=False)
+	# passive_deletes=True ----open the delete line
+	voters=relationship('Voter',backref='design',lazy='dynamic',passive_deletes=True)
 
 
 
@@ -24,7 +26,7 @@ class Designer(Base):
 	id = Column(Integer,autoincrement=True, primary_key=True)
 	name=Column(String(20),nullable=False)
 	insert_time = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-	designs=relationship('Design',backref='designer',lazy='dynamic')
+	designs=relationship('Design',backref='designer',lazy='dynamic',passive_deletes=True)
 
 
 class Voter(Base):
@@ -32,7 +34,7 @@ class Voter(Base):
 	id = Column(Integer,autoincrement=True, primary_key=True)
 	name=Column(String(20),nullable=False)
 	insert_time = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-	design_id=Column(Integer,ForeignKey('vote_design_project.id'),nullable=False)
+	design_id=Column(Integer,ForeignKey('vote_design_project.id',ondelete='CASCADE'),nullable=False)
 
 # print connection.engine
 # pop1=Designer()
