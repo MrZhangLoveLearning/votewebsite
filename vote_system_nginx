@@ -4,7 +4,7 @@ server {
 	
 	location / {
 		include uwsgi_params;
-		uwsgi_pass unix:/var/www/sockets/vote.sock;
+		uwsgi_pass unix:/var/www/socket/vote.sock;
 	}
     
 	error_page 404 /404.html;

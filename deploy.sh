@@ -57,7 +57,7 @@ fi
 
 sudo source  $base_dir/env/bin/activate
 sudo apt-get install libjpeg-dev
-sudo pip install -r votewebsite/requirements.txt
+sudo $base_dir/env/bin/pip install -r votewebsite/requirements.txt
 # delete the old nginx config
 # if [ -f "/etc/nginx/sites-enabled/default" ]
 # then
