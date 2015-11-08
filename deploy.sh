@@ -74,7 +74,7 @@ sudo cp -f votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_
 sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
 
 sudo chown www-data:www-data votewebsite
-sudo uwsgi --ini $base_dir/vote/vote_system_uwsgi.ini
+sudo uwsgi --ini $base_dir/votewebsite/vote_system_uwsgi.ini
 # run the website
 sudo /etc/init.d/nginx reload
 
