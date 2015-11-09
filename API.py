@@ -12,7 +12,13 @@ def index():
 	if 'username' in session:
 		return app.send_static_file('index.html')
 	else:
-		abort(404)
+		username = request.cookies.get('Emp_Name')
+		if username :
+			session['username']=username
+			return app.send_static_file('index.html')
+		else:
+			redirect('http://us.ncuhome.cn/')
+			
 @app.route('/login/<name>')
 def login(name):
     session['username'] =escape(name)
