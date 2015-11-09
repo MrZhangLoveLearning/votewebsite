@@ -3,19 +3,24 @@
 ## to start your project
 #### if you don't git clone the project do this
 
-cd /var/www/
-sudo mkdir vote
-cd vote
-sudo git clone https://github.com/MrZhangLoveLearning/votewebsite.git
-sudo chmod +x votewebsite/deploy.sh
-sudo ./votewebsite/deploy.sh
+		cd /var/www/
+		sudo mkdir vote
+		cd vote
+		sudo git clone https://github.com/MrZhangLoveLearning/votewebsite.git
+		sudo chmod +x votewebsite/deploy.sh
+		sudo ./votewebsite/deploy.sh
 
 
 #### if you have clone it to local do that
 
-cd /var/vote/votewebsite
-git pull
-./deploy.sh
+		cd /var/vote/votewebsite
+		git pull
+		./deploy.sh
+
+#### if you want to set this in your website you can add ssh to your project
+
+		ssh-keygen -t rsa -C "2529450174@qq.com"
+
 
 
 ##API
