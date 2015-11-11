@@ -3,6 +3,12 @@ echo "deploy the votewebsite !"
 
 
 base_dir=/var/www/vote
+log_dir=/var/www/log
+config_dir=/var/www/config
+
+uwsgi_config_dir=${config_dir}/uwsgi
+nginx_config_dir=${config_dir}/nginx
+
 cd $base_dir
 
 
@@ -45,15 +51,24 @@ sudo $base_dir/env/bin/pip install -r votewebsite/requirements.txt
 
 
 # add to nginx config to run the website
-sudo cp -f votewebsite/vote_system_nginx /etc/nginx/sites-available/vote_system_nginx
-sudo ln -sf /etc/nginx/sites-available/vote_system_nginx /etc/nginx/sites-enabled/vote_system_nginx
+sudo cp -f votewebsite/vote_system_nginx.conf ${nginx_config_dir}/sites-available/vote_system_nginx.conf
+sudo ln -sf ${nginx_config_dir}/sites-available/vote_system_nginx.conf ${nginx_config_dir}/sites-enabled/vote_system_nginx.conf
 
 # to make the www-data can save the pic of update
 sudo chown -R www-data:www-data votewebsite
 # to open the log to let uwsgi can open itself
 sudo chown -R www-data:www-data /var/www/log/uwsgi_vote.log
 
-sudo   uwsgi  --ini $base_dir/votewebsite/vote_system_uwsgi.ini
+# use the emperor to manage the uwsgi work
+echo reload uwsgi
+if test $(ps -aux|grep "uwsgi --emperor"|wc -l) -eq 1
+then
+    uwsgi --emperor ${uwsgi_config_dir} --daemonize ${log_dir}/uwsgi_emperor.log
+else
+    touch ${uwsgi_config_dir}/vote_system_uwsgi.ini
+fi
+
+
 # run the website
 # reload nginx
 sudo /etc/init.d/nginx reload
