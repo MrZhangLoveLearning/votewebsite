@@ -1,3 +1,4 @@
+# encoding: utf-8 
 import sys
 print sys.path[0]+'\\static\\upfile\\'+'j.jpg'
 import unittest
